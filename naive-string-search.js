@@ -6,18 +6,12 @@ const stringSearch = (arr, str)=>{
     if(str.length===arr.length && str[0]!==arr[0]) return 0;
     let count = 0;
     for (let i=0; i<arr.length;i++){
-        if(str[0]===arr[i]){
-            let ok=1;
-            for(let k=i+1,j=1;j<str.length;j++,k++){
-                if(str[j]!==arr[k]){
-                    ok=0;
-                    break;
-                }
+         for(let j=0;j<str.length;j++){
+            if(str[j]!==arr[i+j]) break;
+            if(j===str.length-1) count++;
             }
-            if(ok) count++;
         }
-    }
     return count;
 }
 
-console.log(stringSearch("wo", ""));
+console.log(stringSearch("lorie loledll", "lol"));
