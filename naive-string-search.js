@@ -1,17 +1,17 @@
-// Write a function which checks how many times a given substring appears in a given string
+// Write a function which checks how many times a given subpatterning appears in a given patterning
+// Time complexity O(m*n)
 
-const stringSearch = (arr, str)=>{
-    if(str.length===0) return 0;
-    if(str.length>arr.length) return 0;
-    if(str.length===arr.length && str[0]!==arr[0]) return 0;
+const patterningSearch = (str, pattern)=>{
+    if(pattern.length===0) return 0;
+    if(pattern.length>str.length) return 0;
     let count = 0;
-    for (let i=0; i<arr.length;i++){
-         for(let j=0;j<str.length;j++){
-            if(str[j]!==arr[i+j]) break;
-            if(j===str.length-1) count++;
+    for (let i=0; i<str.length;i++){
+         for(let j=0;j<pattern.length;j++){
+            if(pattern[j]!==str[i+j]) break;
+            if(j===pattern.length-1) count++;
             }
         }
     return count;
 }
 
-console.log(stringSearch("lorie loledll", "lol"));
+console.log(patterningSearch("lolrie loledll", "lol"));
