@@ -9,7 +9,11 @@ const createLPSTable = (substr)=>{
         if(substr[i]===substr[k]){
             k++;
         }
-        else if(k!==0) k=0;
+        else if(k!==0) {
+            k=lps[k-1];
+            if(substr[i]===substr[k]) k++
+            else k=0;
+        }
         lps.push(k);
     }
     return lps;
@@ -39,5 +43,5 @@ const checkSubstring = (str, pattern)=>{
 }
 
 let arr="ababdcabcabababd";
-let substr="ababd";
-console.log(checkSubstring(arr, substr));
+let substr="aacaaab";
+console.log(createLPSTable(substr));
