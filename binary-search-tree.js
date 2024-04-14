@@ -65,13 +65,75 @@ class Bst{
         }
         return undefined;
     }
+    bfs(){
+        let queue = [];
+        let nodeValues = [];
+        let currentNode;
+        queue.push(this.root);
+        while(queue.length>0){
+            currentNode = queue.shift();
+            if(currentNode.left) queue.push(currentNode.left);
+            if(currentNode.right) queue.push(currentNode.right);
+            nodeValues.push(currentNode.value);
+        }
+        return nodeValues;
+    }
+    dfs_preOrder(){
+        let data = [];
+        function traverse(node){
+            data.push(node.value);
+            node.left && traverse(node.left);
+            node.right && traverse(node.right);
+        }
+        traverse(this.root);
+        return data;
+    }
+    // Alternative to dfs_preOrder
+    // dfs_preOrder(node, values){ //root left right
+    //     if(!node) return;
+    //     values.push(node.value);
+    //     this.dfs_preOrder(node.left, values);
+    //     this.dfs_preOrder(node.right, values);
+    // }
+    dfs_postOrder(){
+        let data = [];
+        const traverse = (node) => {
+            node.left && traverse(node.left);
+            node.right && traverse(node.right);
+            data.push(node.value);
+        }
+        traverse(this.root);
+        return data;
+    }
+    dfs_inOrder(){
+        let data = [];
+        const traverse = (node)=>{
+            node.left && traverse(node.left);
+            data.push(node.value);
+            node.right && traverse(node.right);
+        }
+        traverse(this.root);
+        return data;
+    }
 }
+
+
 
 let tree = new Bst();
 tree.insert(10);
-tree.insert(18);
+tree.insert(6);
 tree.insert(15);
-tree.insert(7);
+tree.insert(3);
+tree.insert(8);
+tree.insert(20);
 // console.log(tree);
-console.log(tree.contains(12));
-console.log(tree.find(5));
+// console.log(tree.contains(15));
+// console.log(tree.find(6));
+// let values = tree.bfs();
+// console.log(`Values in the tree are [${values}]`);
+let preOrderData = tree.dfs_preOrder();
+console.log(preOrderData);
+let postOrderData = tree.dfs_postOrder();
+console.log(postOrderData);
+let inOrderData = tree.dfs_inOrder();
+console.log(inOrderData);
